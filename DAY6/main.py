@@ -56,11 +56,11 @@ def main():
     menu_selection = 0
     init()
     pause_execution()
-    while menu_selection != 6:
+    while menu_selection != MENU_OPTIONS_NUMBER:
         print_main_menu()
         try:
             menu_selection = int(input(CUSTOM_PRINTS["input-menu"]))
-            if menu_selection < 1 or menu_selection > 6:
+            if menu_selection < 1 or menu_selection > MENU_OPTIONS_NUMBER:
                 raise Exception
         except:
             print(CUSTOM_PRINTS["error-input"])
