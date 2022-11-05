@@ -48,8 +48,11 @@ def show_menu():
     return [print(f"{i}. {MENU_OPTIONS[i]}") for i in range(1, TOTAL_AREAS + 1)]
 
 
-def init_ticket():
-    """ Calls ticket_generator() as many times as in range.
-    :returns: list(Generator)
+def init_tickets():
+    """ Calls ticket_generator() for a range in TOTAL_AREAS and assigns the value to a dictionary.
+    :returns: dict(...Generator)
     """
-    return [ticket_generator() for _ in range(TOTAL_AREAS)]
+    tickets = dict()
+    for i in range(1, TOTAL_AREAS + 1):
+        tickets[i] = ticket_generator()
+    return tickets
