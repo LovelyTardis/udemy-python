@@ -231,7 +231,7 @@ def invoice_button():
         PRODUCTS_PRICES[0] != 0 or \
         PRODUCTS_PRICES[1] != 0 or \
         PRODUCTS_PRICES[2] != 0
-    if product_selected:
+    if product_selected and len(AREA_TEXT.get(1.0, tk.END)) == 1:
         set_total_costs()
         AREA_TEXT.delete(1.0, tk.END)
         INVOICE_NUMBER = random.randint(1000, 9999)
