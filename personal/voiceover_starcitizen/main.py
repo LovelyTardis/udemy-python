@@ -22,59 +22,61 @@ recognizer.pause_threshold = 0.8
 
 def main():
     init_tkinter()
-    start_listening()
-    stop_listening()
-    app.mainloop()
-
-
-def init_tkinter():
-    global button, info_text
-    app.title(WINDOW_TITLE)
-    app.geometry(WINDOW_RESOLUTION)
-    app.resizable(False, False)
-    app.config(background="white")
 
     # Informative text, service active (green) or stopped (red)
+    global info_text
     info_text = Text(
         app, font=("Dosis", 12, "bold"), foreground="red", height=1
     )
-    info_text.insert(END, "Service stopped")
+    info_text.insert(END, "Servicio pausado")
     info_text.config(state=DISABLED)
     info_text.pack(side=TOP)
 
     # Button for activating or stopping the listening service
+    global button
     button = Button(
         app, text="Start", width=15, height=2,
         command=lambda: button_listen()
     )
     button.pack(side=BOTTOM)
 
+    app.mainloop()
+
+
+def init_tkinter():
+    app.title(WINDOW_TITLE)
+    app.geometry(WINDOW_RESOLUTION)
+    app.resizable(False, False)
+    app.config(background="white")
+
 
 def listening_callback(recognize, audio_data):
     try:
         listened = recognize.recognize_google(audio_data, language="es-ES")
     except sr.UnknownValueError:
-        print("Google Speech Recognition could not understand audio")
+        pass
     except sr.RequestError as e:
-        speak("No se ha podido conectar con el servicio de reconocimiento de voz de Google")
+        speak("No se ha podido conectar con el servicio de reconocimiento de voz de Google."
+              "Intentalo más tarde")
     else:
         commands(listened)
 
 
 def button_listen():
-    global active, audio
+    global active
     active = not active
     info_text.config(state=NORMAL)
     info_text.delete(1.0, END)
     if active:
-        button.config(text="Stop")
+        global audio
+        button.config(text="Parar")
         info_text.config(foreground="green")
-        info_text.insert(END, "Service active")
+        info_text.insert(END, "Servicio activo")
         audio = recognizer.listen_in_background(source, listening_callback)
     else:
-        button.config(text="Start")
+        button.config(text="Escuchar")
         info_text.config(foreground="red")
-        info_text.insert(END, "Service stopped")
+        info_text.insert(END, "Servicio pausado")
         stop_listening()
     info_text.config(state=DISABLED)
 
@@ -82,21 +84,24 @@ def button_listen():
 def commands(listened: str):
     if "tren de aterrizaje" in listened:
         kb.press_and_release("n")
-        # TODO: speak()
+        speak("El tren de aterrizaje está en movimiento.")
     elif "modo crucero" in listened:
         kb.press_and_release("c")
     elif "motor de salto" in listened:
         kb.press_and_release("b")
+        speak("Iniciando sistemas, por favor espere.")
     elif "salto cuántico" in listened:
         kb.press("b")
         sleep(1)
         kb.release("b")
+        speak("Viajando al destino fijado.")
     elif "energía" in listened:
         kb.press_and_release("u")
     elif "motores" in listened:
         kb.press_and_release("i")
     elif "para de escuchar" in listened:
         button_listen()
+        speak("Vale, para volver a activarme dale al botón.")
 
 
 def speak(message: str) -> None:
