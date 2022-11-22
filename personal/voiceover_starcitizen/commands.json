@@ -1,0 +1,46 @@
+{
+    "commands": [
+        {
+            "name": "Tren de aterrizaje",
+            "info": "Despliega o repliega el tren de aterrizaje",
+            "input": "n",
+            "modifier": 0,
+            "mode": 0
+        },
+        {
+            "name": "Modo crucero",
+            "info": "Activa o desactiva la velocidad de crucero",
+            "input": "c",
+            "modifier": 0,
+            "mode": 0
+        },
+        {
+            "name": "Motor de salto",
+            "info": "Inicia el modo 'Quantum Travel'",
+            "input": "b",
+            "modifier": 0,
+            "mode": 0
+        },
+        {
+            "name": "Salto cu\u00e1ntico",
+            "info": "Con el motor de salto cargado, viaja al objetivo frontal",
+            "input": "b",
+            "modifier": 0,
+            "mode": 1
+        },
+        {
+            "name": "Energ\u00eda",
+            "info": "Enciende o apaga la energ\u00eda de la nave por completo",
+            "input": "u",
+            "modifier": 0,
+            "mode": 0
+        },
+        {
+            "name": "Motores",
+            "info": "Enciende o apaga los motores principales",
+            "input": "i",
+            "modifier": 0,
+            "mode": 0
+        }
+    ]
+}
