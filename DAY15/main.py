@@ -5,6 +5,9 @@
     Creates a plot_tree for every decision it made and what is predicted values for the survivor
     rate, in this case. It also shows a plot for how every feature impacts the final result,
     in this case the genre has a major impact and having parents or offspring has less impact.
+
+    This is also on Google Colaboratory:
+    https://colab.research.google.com/drive/1ZY1SXZaRRerFVFfkWNt78b_CKInZ2OuA?usp=share_link
 """
 import pandas as pd
 import matplotlib as plt
