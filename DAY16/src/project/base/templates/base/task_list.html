@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pending List</title>
+</head>
+<body>
+    <h1>Pending tasks</h1>
+
+    <a href="{% url 'create-task' %}">Create task</a>
+
+    <table>
+        <tr>
+            <th>Elements</th>
+            <th>Detail</th>
+        </tr>
+        {% for task in tasks %}
+        <tr>
+            <td>{{task.title}}</td>
+            <td><a href="{% url 'task' task.id %}">Link</a></td>
+        </tr>
+
+        {% empty %}
+        <h3>There are no pending tasks</h3>
+
+        {% endfor %}
+
+    </table>
+</body>
+</html>

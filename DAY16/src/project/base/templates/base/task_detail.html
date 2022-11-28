@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task details</title>
+</head>
+<body>
+    <h1>Task details</h1>
+    <h2>{{task.title}}</h2>
+    <h4>{{task.description}}</h4>
+
+    {% if task.done %}
+    <h4>Completed</h4>
+    {% else %}
+    <h4>Pending</h4>
+    {% endif %}
+</body>
+</html>
