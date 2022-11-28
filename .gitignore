@@ -4,3 +4,4 @@ build
 dist
 *.spec
 .env
+personal/voiceover_starcitizen/test.py
