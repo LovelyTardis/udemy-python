@@ -1,30 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Pending List</title>
-</head>
-<body>
-    <h1>Pending tasks</h1>
+{% extends 'base/main.html' %}
 
-    <a href="{% url 'create-task' %}">Create task</a>
+{% block title %}Task list{% endblock title %}
 
-    <table>
-        <tr>
-            <th>Elements</th>
-            <th>Detail</th>
-        </tr>
-        {% for task in tasks %}
-        <tr>
-            <td>{{task.title}}</td>
-            <td><a href="{% url 'task' task.id %}">Link</a></td>
-        </tr>
+{% block content %}
+<div class="top-bar">
+    <div>
+        <p>Logged as: {{request.user}}</p>
+        <p style="margin:0;">You have {{ count }} pending task{{ count|pluralize }}</p>
+    </div>
+    <a href="{% url 'logout' %}">Log out</a>
+</div>
 
-        {% empty %}
-        <h3>There are no pending tasks</h3>
+<div id="search-create-wrapper">
+    <form method="GET" style="display: flex;">
+        <input type="text" name="search-text" value="{{ search_text }}">
+        <input class="button" type="submit" value="Search">
+    </form>
+    <a id="create-link" href="{% url 'create-task' %}">&#10010; New task</a>
+</div>
 
-        {% endfor %}
 
-    </table>
-</body>
-</html>
+
+<div class="task-items-wrapper">
+    {% if not tasks %}
+    <h3>There are no pending tasks</h3>
+    {% endif %}
+    {% for task in tasks %}
+    <div class="task-wrapper">
+        <div class="task-title">
+            {% if task.done %}
+            <div class="icon-task-done"></div>
+            <s><a href="{% url 'task' task.id %}">{{ task.title }}</a></s>
+            {% else %}
+            <div class="icon-task-pending"></div>
+            <a href="{% url 'task' task.id %}">{{ task.title }}</a>
+            {% endif %}
+        </div>
+        <a class="edit-link" href="{% url 'edit-task' task.id %}">&#9998; Edit</a>
+        <a class="delete-link" href="{% url 'delete-task' task.id %}">&#10005; Delete</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

@@ -1,18 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Task details</title>
-</head>
-<body>
+{% extends 'base/main.html' %}
+
+{% block title %}Task - {{task.title}}{% endblock title %}
+
+{% block content %}
+<div class="top-bar">
+    <a href="{% url 'tasks' %}">&#x1F860; Back</a>
+</div>
+
+
+<div class="card-body">
     <h1>Task details</h1>
-    <h2>{{task.title}}</h2>
-    <h4>{{task.description}}</h4>
+    <h3>Task: {{ task.title }}</h3>
+    <h4>Description: {{ task.description }}</h4>
 
     {% if task.done %}
-    <h4>Completed</h4>
+    <h4>Status: completed</h4>
     {% else %}
-    <h4>Pending</h4>
+    <h4>Status: pending</h4>
     {% endif %}
-</body>
-</html>
+</div>
+{% endblock content %}

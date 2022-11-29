@@ -1,15 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Create task</title>
-</head>
-<body>
-    <h1>Create a new task</h1>
+{% extends 'base/main.html' %}
 
+{% block title %}Form - {{task.title}}{% endblock title %}
+
+{% block content %}
+<div class="top-bar">
+    <a href="{% url 'tasks' %}">&#x1F860; Back</a>
+</div>
+
+<div class="card-body">
+    <h1>Task formulary</h1>
     <form method="POST" action="">
+        {% csrf_token %}
         {{form.as_p}}
-        <input type="submit" value="Send">
+        <input class="button" type="submit" value="Send">
     </form>
-</body>
-</html>
+</div>
+{% endblock content %}
